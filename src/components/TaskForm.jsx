@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../features/task/taskSlice";
 import { v4 } from "uuid";
+import { BsFillCheckSquareFill } from "react-icons/bs";
 
 const TaskForm = () => {
   const dispatch = useDispatch();
@@ -20,10 +21,12 @@ const TaskForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addTask({
-      id: v4(),
-      ...task
-    }));
+    dispatch(
+      addTask({
+        id: v4(),
+        ...task,
+      })
+    );
   };
 
   return (
@@ -41,7 +44,9 @@ const TaskForm = () => {
         placeholder="Description"
         onChange={handleChange}
       ></textarea>
-      <button>Save</button>
+      <button>
+        <BsFillCheckSquareFill /> Save
+      </button>
     </form>
   );
 };

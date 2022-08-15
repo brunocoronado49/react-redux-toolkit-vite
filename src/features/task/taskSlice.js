@@ -21,10 +21,18 @@ export const taskSlice = createSlice({
   reducers: {
     addTask: (state, action) => {
       state.push(action.payload)
+    },
+    deleteTask: (state, action) => {
+      const taskFound = state.find(task => task.id === action.payload)
+      if (taskFound) {
+        state.splice(state.indexOf(taskFound), 1)
+      } else {
+        alert("No task found")
+      }
     }
   }
 })
 
-export const { addTask } = taskSlice.actions
+export const { addTask, deleteTask } = taskSlice.actions
 
 export default taskSlice.reducer
