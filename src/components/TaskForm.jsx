@@ -1,13 +1,16 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addTask } from "../features/task/taskSlice";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask, updateTask } from "../features/task/taskSlice";
 import { v4 } from "uuid";
 import { BsFillCheckSquareFill } from "react-icons/bs";
 
 const TaskForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
+
+  const tasks = useSelector((state) => state.tasks);
 
   const [task, setTask] = useState({
     title: "",
@@ -23,14 +26,25 @@ const TaskForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(
-      addTask({
-        id: v4(),
-        ...task,
-      })
-    );
+
+    if (params.id) {
+      dispatch(updateTask(task));
+    } else {
+      dispatch(
+        addTask({
+          id: v4(),
+          ...task,
+        })
+      );
+    }
     navigate("/");
   };
+
+  useEffect(() => {
+    if (params.id) {
+      setTask(tasks.find((task) => task.id === params.id));
+    }
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -38,6 +52,7 @@ const TaskForm = () => {
         type="text"
         name="title"
         placeholder="Title"
+        value={task.title}
         onChange={handleChange}
       />
       <textarea
@@ -45,6 +60,7 @@ const TaskForm = () => {
         cols="30"
         rows="5"
         placeholder="Description"
+        value={task.description}
         onChange={handleChange}
       ></textarea>
       <button>

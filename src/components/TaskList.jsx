@@ -27,9 +27,9 @@ const taskList = () => {
           <button onClick={() => handleDelete(task.id)}>
             <BsFillTrashFill /> Delete
           </button>
-          <button>
+          <Link to={`/update-task/${task.id}`}>
             <BsFileArrowUpFill /> Update
-          </button>
+          </Link>
         </div>
       ))}
     </div>
