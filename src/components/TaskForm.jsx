@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addTask } from "../features/task/taskSlice";
 import { v4 } from "uuid";
@@ -6,6 +7,7 @@ import { BsFillCheckSquareFill } from "react-icons/bs";
 
 const TaskForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [task, setTask] = useState({
     title: "",
@@ -27,6 +29,7 @@ const TaskForm = () => {
         ...task,
       })
     );
+    navigate("/");
   };
 
   return (

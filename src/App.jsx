@@ -1,13 +1,19 @@
-import React from "react";
+import { Fragment } from "react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 
 const App = () => {
   return (
     <div>
-      <h1>Hello World</h1>
-      <TaskForm />
-      <TaskList />
+      <BrowserRouter>
+        <Fragment>
+          <Routes>
+            <Route path="/" element={<TaskList />} />
+            <Route path="/create-task" element={<TaskForm />} />
+          </Routes>
+        </Fragment>
+      </BrowserRouter>
     </div>
   );
 };
