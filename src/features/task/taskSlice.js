@@ -31,11 +31,11 @@ export const taskSlice = createSlice({
       }
     },
     updateTask: (state, action) => {
-      const {id, title, description} = action.payload;
+      const { id, title, description } = action.payload;
       const taskUpdate = state.find(task => task.id === id);
       if (taskUpdate) {
         taskUpdate.title = title,
-        taskUpdate.description = description
+          taskUpdate.description = description
       }
     }
   }
