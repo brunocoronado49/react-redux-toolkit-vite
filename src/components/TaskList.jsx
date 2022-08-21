@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { BsFillTrashFill, BsFileArrowUpFill } from "react-icons/bs";
 import { deleteTask } from "../features/task/taskSlice";
 
 const taskList = () => {

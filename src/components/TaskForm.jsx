@@ -44,17 +44,23 @@ const TaskForm = () => {
     if (params.id) {
       setTask(tasks.find((task) => task.id === params.id));
     }
-  }, []);
+  }, [params.id, tasks]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-zinc-800 max-w-sm p-5 rounded-md"
+    >
+      <label className="block font-bold">Task:</label>
       <input
         type="text"
         name="title"
         placeholder="Title"
         value={task.title}
         onChange={handleChange}
+        className="w-full p-2 rounded-md bg-zinc-600 mb-2"
       />
+      <label className="block font-bold">Description:</label>
       <textarea
         name="description"
         cols="30"
@@ -62,10 +68,9 @@ const TaskForm = () => {
         placeholder="Description"
         value={task.description}
         onChange={handleChange}
+        className="w-full p-2 rounded-md bg-zinc-600 mb-2"
       ></textarea>
-      <button>
-        <BsFillCheckSquareFill /> Save
-      </button>
+      <button className="bg-indigo-600 px-2 py-1 rounded-md block">Save</button>
     </form>
   );
 };
